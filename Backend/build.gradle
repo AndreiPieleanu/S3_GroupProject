@@ -1,0 +1,115 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id "org.sonarqube" version "4.0.0.2929"
+    id 'jacoco'
+}
+
+group 's3.algorithalliance'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.flywaydb:flyway-core:9.16.0'
+    implementation 'org.flywaydb:flyway-mysql:9.16.0'
+    implementation 'mysql:mysql-connector-java:8.0.32'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
+    //implementation 'au.com.dius:pact-jvm-provider-junit5-spring:4.0.10'
+    //implementation 'au.com.dius:pact-jvm-provider-spring:4.0.10'
+    //implementation 'au.com.dius:pact-jvm-provider-spring_2.11:3.5.24'
+    //implementation 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.15'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // for login
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+//	testImplementation 'org.mockito:mockito-inline:5.1.0'
+//	testImplementation 'org.mockito:mockito-junit-jupiter:5.1.0'
+
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.3'
+    //testImplementation 'com.playtika.testcontainers:embedded-mysql:2.2.5'
+    testImplementation 'com.h2database:h2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+sonar {
+    properties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.projectKey", "algorithm-alliance"
+        property "sonar.projectName", "Algorithm Alliance"
+        property "sonar.login", "sqp_32f2556b70dbc02a927b40050f3f50e9fae915d0"
+        property "sonar.qualitygate.wait", true
+        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/test/jacocoTestReport.xml"
+        property "sonar.coverage.exclusions",
+                "**/s3/algorithalliance/configuration/**/*," +
+                "**/s3/algorithalliance/controller/**/*," +
+                "**/s3/algorithalliance/datalayer/entities/**/*," +
+                "**/s3/algorithalliance/domain/**/*," +
+                "**/s3/algorithalliance/servicelayer/converters/**/*," +
+                "**/s3/algorithalliance/servicelayer/exc/**/*," +
+                "**/s3/algorithalliance/AlgorithmAllianceMain.java," +
+                "**/s3/algorithalliance/servicelayer/impl/AccessTokenEncoderDecoder.java"
+        }
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+test {
+    filter {
+        includeTestsMatching 's3.algorithalliance.servicelayer.impl.*'
+        includeTestsMatching 's3.algorithalliance.datalayer.*'
+    }
+}
+
+def exclusion_list = [
+        "s3/algorithalliance/configuration/*",
+        "s3/algorithalliance/controller/*",
+        "s3/algorithalliance/datalayer/entities/*",
+        "s3/algorithalliance/domain/*",
+        "s3/algorithalliance/servicelayer/converters/*",
+        "s3/algorithalliance/servicelayer/exc/*",
+        "**/AlgorithmAllianceMain.class",
+        "**/AccessTokenEncoderDecoder.class"
+]
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: exclusion_list)
+        }))
+        executionData.setFrom(files("${buildDir}/jacoco/test.exec"))
+    }
+}

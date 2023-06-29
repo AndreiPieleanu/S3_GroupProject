@@ -1,0 +1,1036 @@
+{
+	"info": {
+		"_postman_id": "03fcb1e9-1de3-492b-95a9-ea6307777488",
+		"name": "Algorithm Alliance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CR users",
+			"item": [
+				{
+					"name": "get user with id 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZG9lQGdtYWlsLmNvbSIsImlhdCI6MTY4NjIxNDAyOCwiZXhwIjoxNjg2MjE0MDM4LCJyb2xlIjoiVVNFUiIsInVzZXJJZCI6MX0.ARiFZoVa3d638PGoEHeUSSuFBukk2hOMvHEjtTFlin0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jdoe@gmail.com\",\r\n    \"username\": \"JDoe\",\r\n    \"password\": \"jdoe123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CR branches",
+			"item": [
+				{
+					"name": "get all public branches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/branches/public",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"branches",
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get branches of user with id 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZG9lQGdtYWlsLmNvbSIsImlhdCI6MTY4NzAxMzgzMSwiZXhwIjoxNjg3MDE1NjMxLCJyb2xlIjoiVVNFUiIsInVzZXJJZCI6MX0.X8PrVvqcAd2iw-91bvO38Y30hNhHidBsDHIn6-RpN4E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/branches/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"branches",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add a new public branch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"main\",\r\n    \"userId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/branches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"branches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add a new user branch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"main\",\r\n    \"userId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/branches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"branches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CR commits",
+			"item": [
+				{
+					"name": "get particular commit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/commits/:commitId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commits",
+								":commitId"
+							],
+							"variable": [
+								{
+									"key": "commitId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all commits of branch with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/commits/branch/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commits",
+								"branch",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new commit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"fixed merging issues 4\",\r\n    \"branchId\": 1,\r\n    \"version\": \"12.34.56.81\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/commits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get test sets results of commit with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/commits/:commitId/response",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commits",
+								":commitId",
+								"response"
+							],
+							"variable": [
+								{
+									"key": "commitId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all commits results for branch with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/commits/branch/:branchId/response",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commits",
+								"branch",
+								":branchId",
+								"response"
+							],
+							"variable": [
+								{
+									"key": "branchId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all commits of all branches of user with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/commits/all/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"commits",
+								"all",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CR test sets",
+			"item": [
+				{
+					"name": "get particular test set",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testSets/:testSetId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets",
+								":testSetId"
+							],
+							"variable": [
+								{
+									"key": "testSetId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get test sets of commit with id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/testSets/commits/:commitId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets",
+								"commits",
+								":commitId"
+							],
+							"variable": [
+								{
+									"key": "commitId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new test set",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test set 16\",\r\n    \"commitId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/testSets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get number of tests in a test set with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testSets/:testSetId/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets",
+								":testSetId",
+								"count"
+							],
+							"variable": [
+								{
+									"key": "testSetId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get number of passed tests in a test set with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testSets/:testSetId/count/passed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets",
+								":testSetId",
+								"count",
+								"passed"
+							],
+							"variable": [
+								{
+									"key": "testSetId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get results of tests for a test set with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testSets/:testSetId/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets",
+								":testSetId",
+								"results"
+							],
+							"variable": [
+								{
+									"key": "testSetId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CR tests",
+			"item": [
+				{
+					"name": "get particular test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testresults/:testId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testresults",
+								":testId"
+							],
+							"variable": [
+								{
+									"key": "testId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tests of test set with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testresults/testSet/:testSetId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testresults",
+								"testSet",
+								":testSetId"
+							],
+							"variable": [
+								{
+									"key": "testSetId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new test",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"shouldCreatePrinterInstance\",\r\n    \"testSetId\": 1, \r\n    \"duration\": \"00:01:23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/testresults",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testresults"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get number of subtests of test with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testresults/:testId/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testresults",
+								":testId",
+								"count"
+							],
+							"variable": [
+								{
+									"key": "testId",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get number of passed subtests of test with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testresults/:testId/count/passed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testresults",
+								":testId",
+								"count",
+								"passed"
+							],
+							"variable": [
+								{
+									"key": "testId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subtests results of test with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testresults/:testId/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testresults",
+								":testId",
+								"results"
+							],
+							"variable": [
+								{
+									"key": "testId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CR subtests",
+			"item": [
+				{
+					"name": "get particular subtest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subtests/:subTestId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests",
+								":subTestId"
+							],
+							"variable": [
+								{
+									"key": "subTestId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subtests of test with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subtests/test/:testId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests",
+								"test",
+								":testId"
+							],
+							"variable": [
+								{
+									"key": "testId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new subtest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"calculateMeasurment\",\r\n    \"testId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/subtests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get passed test steps of subtest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subtests/:subtestId/count/passed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests",
+								":subtestId",
+								"count",
+								"passed"
+							],
+							"variable": [
+								{
+									"key": "subtestId",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all test steps of subtest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subtests/:subtestId/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests",
+								":subtestId",
+								"count"
+							],
+							"variable": [
+								{
+									"key": "subtestId",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CR test steps",
+			"item": [
+				{
+					"name": "get particular test step",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/teststeps/:setsStepId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teststeps",
+								":setsStepId"
+							],
+							"variable": [
+								{
+									"key": "setsStepId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get test step of subtest with id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subtestId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teststeps/subtest/:subTestId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teststeps",
+								"subtest",
+								":subTestId"
+							],
+							"variable": [
+								{
+									"key": "subTestId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add test step",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stepNo\": 2,\r\n    \"resultDetails\": \"method executed successfully!\",\r\n    \"subTestId\": 1, \r\n    \"testErrorId\": 1,\r\n    \"testWarningId\": 1,\r\n    \"resultTypeId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teststeps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teststeps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get number of passed test steps of subtest with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subtests/:subtestId/count/passed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests",
+								":subtestId",
+								"count",
+								"passed"
+							],
+							"variable": [
+								{
+									"key": "subtestId",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get total number of test steps of subtest with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subtests/:subtestId/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subtests",
+								":subtestId",
+								"count"
+							],
+							"variable": [
+								{
+									"key": "subtestId",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get results for all tests of a test set with an id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testSets/:testSetId/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testSets",
+								":testSetId",
+								"results"
+							],
+							"variable": [
+								{
+									"key": "testSetId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"jdoe@gmail.com\",\r\n    \"password\": \"jdoe123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
